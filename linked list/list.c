@@ -9,6 +9,8 @@ struct node
 struct node *start = NULL;
 struct node *getNode();
 struct node *create();
+void traverse();
+void rev_traverse(struct node *temp);
 
 void main()
 {
@@ -17,8 +19,10 @@ void main()
     {
         printf("-----MAIN MENU-----\n");
         printf("1-for create list\n");
-        printf("2-for insertion at ending\n");
-        printf("3-for insertion at begginng\n");
+        printf("2-for traverse left to right\n");
+        printf("3-for traverse in reverse\n");
+        printf("4-for insertion at ending\n");
+        printf("5-for insertion at begginng\n");
         printf("0-for exit\n");
         scanf("%d",&option);
 
@@ -27,11 +31,17 @@ void main()
         case 1: create();
             printf("linked list created!\n"); 
             break;
+
+        case 2: traverse();
+              break;
+
+        case 3: rev_traverse(start);
+                break;
+
         default:
             break;
         }
-    } while (option != 4);
-    
+    } while (option != 0);
 }
 
 struct node *getNode()
@@ -69,4 +79,37 @@ struct node *create()
         scanf("%d",&n);
     }
     
+}
+
+void traverse()
+{
+    struct node *temp;
+    temp=start;
+    if(start == NULL)
+    {
+        printf("The list is empty\n");
+    }
+    else
+    {
+        printf("content of the list:\n");
+        while(temp != NULL)
+        {
+            printf("%d  ",temp->data);
+            temp=temp->next;
+        }
+        printf("\n");
+    }
+}
+
+void rev_traverse(struct node *temp)
+{
+    if(temp==NULL)
+    {
+        return;
+    }
+    else
+    {
+        rev_traverse(temp->next);
+        printf("%d  ",temp->data);
+    }
 }
